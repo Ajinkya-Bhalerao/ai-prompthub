@@ -45,7 +45,7 @@ const PromptCard = (props: Props) => {
           <Avatar src="" />
           <span className={`${styles.label} pl-3`}>@Ajinkya</span>
         </div>
-        <Ratings rating={3.5} />
+        <Ratings rating={5} />
       </div>
       <br />
       <Link href="/shop/124" className="w-full">
