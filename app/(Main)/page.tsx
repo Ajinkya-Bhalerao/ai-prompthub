@@ -23,6 +23,8 @@ const Page = ({}: Props) => {
   const [isMounted, setIsMounted] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isSellerExist, setIsSellerExist] = useState(false);
+
   useEffect(() => {
     if (!isMounted) {
       setIsMounted(true);
@@ -35,6 +37,7 @@ const Page = ({}: Props) => {
       .get("/api/me")
       .then((res) => {
         setUser(res.data.user);
+        setIsSellerExist(res.data.shop ? true : false);
         setLoading(false);
       })
       .catch((error) => {
@@ -54,7 +57,7 @@ const Page = ({}: Props) => {
       ) : (
         <div>
           <div className="banner">
-            <Header activeItem={0} user={user} isSellerExist={false} />
+            <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
             <Hero />
             <div>
               <Image

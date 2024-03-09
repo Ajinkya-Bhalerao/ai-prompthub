@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Navigation from "./Navigation";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -12,11 +12,10 @@ type Props = {
   isSellerExist: boolean | undefined;
 };
 
-const Header = ({ user, activeItem}: Props) => {
-  const [active, setActive] = useState(false)
+const Header = ({ user, activeItem, isSellerExist }: Props) => {
+  const [active, setActive] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
   const [open, setOpen] = useState(false);
-  const [isSellerExist, setIsSellerExist] = useState(false);
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
@@ -33,10 +32,10 @@ const Header = ({ user, activeItem}: Props) => {
       setOpen(!open);
     }
   };
-
-   const handleProfile = () => {
-     setActiveProfile(!activeProfile);
-   };
+  useEffect;
+  const handleProfile = () => {
+    setActiveProfile(!activeProfile);
+  };
   return (
     <div
       className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${
