@@ -8,7 +8,7 @@ import { User } from "@clerk/nextjs/dist/types/server";
 import  DropDown  from "./DropDown";
 type Props = {
   activeItem: number;
-  user: User | undefined;
+  user: User | null;
   isSellerExist: boolean | undefined;
 };
 

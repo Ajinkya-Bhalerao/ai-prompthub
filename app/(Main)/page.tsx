@@ -19,86 +19,81 @@ import { User } from "@clerk/nextjs/dist/types/server";
 
 type Props = {};
 
-const Page = (props: Props) => {
+const Page = ({}: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [user, setUser] = useState<User | undefined>();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [isSellerExist, setIsSellerExist] = useState(false);
 
   useEffect(() => {
     if (!isMounted) {
       setIsMounted(true);
     }
-    userData();
   }, [isMounted]);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   axios
-  //     .get("/api/me")
-  //     .then((res) => {
-  //       setUser(res.data.user);
-  //       setIsSellerExist(res.data.shop ? true : false);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
-  const userData = async () => {
-    const data = await getUser();
-    setUser(data?.user);
-    if (data?.shop) {
-      setIsSellerExist(true);
-    }
-  };
-  return (
-      <div>
-        <div className="banner">
-          <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
-          <Hero />
-          <div>
-            <Image
-              src={
-                "https://pixner.net/aikeu/assets/images/footer/shape-two.png"
-              }
-              width={120}
-              height={120}
-              alt=""
-              className="absolute right-[30px]"
-            />
-            <br />
-            <div className="w-[95%] md:w-[90%] xl:w-[80%] 2xl:w-[75%] m-auto">
-              <About />
-              <div>
-                <h1 className={`${styles.heading} p-2 font-Monserrat`}>
-                  Latest Prompts
-                </h1>
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("/api/me")
+      .then((res) => {
+        setUser(res.data.user);
+        setIsSellerExist(res.data.shop ? true : false);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
-                <div className="flex flex-wrap">
-                  <PromptCard />
-                  <PromptCard />
-                  <PromptCard />
-                  <PromptCard />
-                  <PromptCard />
-                  <PromptCard />
-                  <PromptCard />
-                  <PromptCard />
-                </div>
-                <br />
-                <BestSellers />
-                <Future />
-                <Partners />
-                <SellerBanner />
-                <br />
-                <br />
-                <Divider className="bg-[#ffffff23]" />
-                <Footer />
+  if (!isMounted) {
+    return null;
+  }
+  return (
+    <div>
+      <div className="banner">
+        <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
+        <Hero />
+        <div>
+          <Image
+            src={"https://pixner.net/aikeu/assets/images/footer/shape-two.png"}
+            width={120}
+            height={120}
+            alt=""
+            className="absolute right-[30px]"
+          />
+          <br />
+          <div className="w-[95%] md:w-[90%] xl:w-[80%] 2xl:w-[75%] m-auto">
+            <About />
+            <div>
+              <h1 className={`${styles.heading} p-2 font-Monserrat`}>
+                Latest Prompts
+              </h1>
+
+              <div className="flex flex-wrap">
+                <PromptCard />
+                <PromptCard />
+                <PromptCard />
+                <PromptCard />
+                <PromptCard />
+                <PromptCard />
+                <PromptCard />
+                <PromptCard />
               </div>
+              <br />
+              <BestSellers />
+              <Future />
+              <Partners />
+              <SellerBanner />
+              <br />
+              <br />
+              <Divider className="bg-[#ffffff23]" />
+              <Footer />
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
