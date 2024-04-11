@@ -12,6 +12,8 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    console.log("user new", user)
+
     const shop = await prisma.shops.findUnique({
       where: {
         userId: user.id,
