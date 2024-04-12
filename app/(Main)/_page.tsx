@@ -20,11 +20,11 @@ import { User } from "@clerk/nextjs/server";
 type Props = {
   user: User | undefined;
   isSellerExist: boolean | undefined;
+  promptsData: any;
 };
 
-const RoutePage = ({user,isSellerExist}: Props) => {
+const RoutePage = ({ user, isSellerExist, promptsData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  
 
   useEffect(() => {
     if (!isMounted) {
@@ -48,14 +48,19 @@ const RoutePage = ({user,isSellerExist}: Props) => {
   //     });
   // }, []);
 
-//   const userData = async () => {
-//     const data = await getUser();
-//     setUser(data?.user);
-//     if (data?.shop) setIsSellerExist(true);
-//   };
+  //   const userData = async () => {
+  //     const data = await getUser();
+  //     setUser(data?.user);
+  //     if (data?.shop) setIsSellerExist(true);
+  //   };
   if (!isMounted) {
     return null;
   }
+  const seeData = () => {
+    console.log(promptsData);
+  };
+
+  // seeData()
   return (
     <div>
       <div className="banner">
@@ -78,14 +83,9 @@ const RoutePage = ({user,isSellerExist}: Props) => {
               </h1>
 
               <div className="flex flex-wrap">
-                <PromptCard />
-                <PromptCard />
-                <PromptCard />
-                <PromptCard />
-                <PromptCard />
-                <PromptCard />
-                <PromptCard />
-                <PromptCard />
+                {promptsData.map((prompt:any) =>{
+                    return <PromptCard key={prompt.id} prompt={prompt}/>
+                })}
               </div>
               <br />
               <BestSellers />

@@ -1,13 +1,29 @@
 import { Avatar, Button, Card, Divider } from "@nextui-org/react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "@/utils/styles";
 import demo from "@/public/Assets/demo.jpg";
 import Ratings from "@/utils/Ratings";
 import Link from "next/link";
-type Props = {};
+import { getShopByID } from "@/actions/shop/getShopById";
+type Props = {
+  prompt: any;
+};
 
-const PromptCard = (props: Props) => {
+const PromptCard = ({ prompt }: Props) => {
+  const [shopData, setShopData] = useState<any>();
+
+  useEffect(() => {
+    // console.log(prompt.sellerId);
+    if (prompt) getShopInfo();
+  }, [prompt]);
+
+  const getShopInfo = async () => {
+    const shopData = await getShopByID({ shopId: prompt?.sellerId });
+    
+    setShopData(shopData);
+  };
+  console.log(prompt)
   return (
     <Card
       radius="lg"
@@ -15,7 +31,7 @@ const PromptCard = (props: Props) => {
     >
       <div className="relative">
         <Image
-          src="https://pixner.net/aikeu/assets/images/category/fourteen.png"
+          src={prompt?.images[0]?.url}
           className="w-full"
           width={300}
           height={300}
@@ -29,30 +45,30 @@ const PromptCard = (props: Props) => {
               height={25}
               alt=""
             />
-            <span className={`${styles.label} pl-2 text-white`}>ChatGPT</span>
+            <span className={`${styles.label} pl-2 text-white`}>{prompt?.category}</span>
           </div>
         </div>
       </div>
 
       <div className="w-full flex items-center justify-between py-2">
-        <h3 className={`${styles.label} pl-3`}>Animal Prompts</h3>
-        <p className={`${styles.paragraph}`}>$25.00</p>
+        <h3 className={`${styles.label} pl-3`}>{prompt?.name}</h3>
+        <p className={`${styles.paragraph}`}>${prompt?.price}</p>
       </div>
       <Divider className="bg-[#ffffff18] my-3" />
 
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center">
-          <Avatar src="" />
-          <span className={`${styles.label} pl-3`}>@Ajinkya</span>
+          <Avatar src={shopData?.avatar} />
+          <span className={`${styles.label} pl-3`}>@{shopData?.name}</span>
         </div>
-        <Ratings rating={5} />
+        <Ratings rating={prompt.rating} />
       </div>
       <br />
-      <Link href="/shop/124" className="w-full">
+      <Link href={`/prompt/${prompt.id}`} className="w-full">
         <Button
           className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
         >
-            Get Prompts
+          Get Prompts
         </Button>
       </Link>
     </Card>
