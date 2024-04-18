@@ -56,9 +56,6 @@ const RoutePage = ({ user, isSellerExist, promptsData }: Props) => {
   if (!isMounted) {
     return null;
   }
-  const seeData = () => {
-    console.log(promptsData);
-  };
 
   // seeData()
   return (

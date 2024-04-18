@@ -23,7 +23,6 @@ const PromptCard = ({ prompt }: Props) => {
     
     setShopData(shopData);
   };
-  console.log(prompt)
   return (
     <Card
       radius="lg"
@@ -58,6 +57,7 @@ const PromptCard = ({ prompt }: Props) => {
 
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center">
+          
           <Avatar src={shopData?.avatar} />
           <span className={`${styles.label} pl-3`}>@{shopData?.name}</span>
         </div>
