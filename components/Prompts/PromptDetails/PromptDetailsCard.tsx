@@ -5,8 +5,19 @@ import Marquee from "react-fast-marquee";
 import { styles } from "@/utils/styles";
 import { Chip, Button } from "@nextui-org/react";
 import Ratings from "@/utils/Ratings";
+import { IoCloseOutline } from "react-icons/io5";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
-const PromptDetailsCard = ({ promptData }: { promptData: any }) => {
+const PromptDetailsCard = ({
+  promptData,
+  stripePromise,
+  clientSecret,
+}: {
+  promptData: any;
+  stripePromise: any;
+  clientSecret: string;
+}) => {
   const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
   const [open, setOpen] = useState(false);
   const tags = promptData?.tags;
@@ -96,18 +107,16 @@ const PromptDetailsCard = ({ promptData }: { promptData: any }) => {
             <br />
             <div className="w-full flex items-center flex-wrap my-2">
               {tagsList.map((tag: string) => (
-              
-                  <Chip
-                    className="bg-[#1e1c2f] rounded-full h-[35px] mr-2 my-2 2xl:mr-4 cursor-pointer"
-                    key={tag}
+                <Chip
+                  className="bg-[#1e1c2f] rounded-full h-[35px] mr-2 my-2 2xl:mr-4 cursor-pointer"
+                  key={tag}
+                >
+                  <span
+                    className={`${styles.label} !text-xl text-white font-Monserrat`}
                   >
-                    <span
-                      className={`${styles.label} !text-xl text-white font-Monserrat`}
-                    >
-                      {tag}
-                    </span>
-                  </Chip>
-              
+                    {tag}
+                  </span>
+                </Chip>
               ))}
             </div>
             <br />
@@ -121,6 +130,30 @@ const PromptDetailsCard = ({ promptData }: { promptData: any }) => {
           </div>
         </div>
       </div>
+      {open && (
+        <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
+          <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3">
+            <div className="w-full flex justify-end">
+              <IoCloseOutline
+                size={40}
+                className="text-black cursor-pointer"
+                onClick={() => setOpen(!open)}
+              />
+            </div>
+            <div className="w-full">
+              {stripePromise && clientSecret && (
+                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                  <CheckoutForm
+                    setOpen={setOpen}
+                    open={open}
+                    promptData={promptData}
+                  />
+                </Elements>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

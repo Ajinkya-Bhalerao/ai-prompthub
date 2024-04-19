@@ -7,13 +7,21 @@ import PromptCard from "../PromptCard";
 const PromptDetails = ({
   promptData,
   relatedPrompts,
+  stripePromise,
+  clientSecret,
 }: {
   promptData: any;
   relatedPrompts: any;
+  stripePromise: any;
+  clientSecret: string;
 }) => {
   return (
     <div>
-      <PromptDetailsCard promptData={promptData} />
+      <PromptDetailsCard
+        promptData={promptData}
+        stripePromise={stripePromise}
+        clientSecret={clientSecret}
+      />
       <br />
       <br />
       <PromptInformation promptData={promptData} />
@@ -22,7 +30,7 @@ const PromptDetails = ({
       <div className="flex flex-wrap">
         {relatedPrompts &&
           relatedPrompts.map((prompt: any) => {
-            return <PromptCard prompt={prompt} key={prompt} />;
+            return <PromptCard prompt={prompt} key={prompt.id} />;
           })}
       </div>
       {relatedPrompts.length === 0 && (
