@@ -118,7 +118,7 @@ const UserAllOrders = ({
 
   return (
     <>
-      <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
+      <Header activeItem={9} user={user} isSellerExist={isSellerExist} />
       <div className="w-[90%] m-auto">
         <h1 className={`${styles.heading} text-center py-5`}>All Orders</h1>
         <br />
