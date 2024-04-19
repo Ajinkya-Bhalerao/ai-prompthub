@@ -1,6 +1,7 @@
 import { newOrder } from "@/actions/orders/createOrder";
 import { getUser } from "@/actions/user/getUser";
 import { styles } from "@/utils/styles";
+import { User } from "@clerk/nextjs/server";
 import {
   LinkAuthenticationElement,
   PaymentElement,
@@ -10,10 +11,12 @@ import {
 import React, { useState } from "react";
 
 const CheckoutForm = ({
+  user,
   setOpen,
   open,
   promptData,
 }: {
+  user:User | undefined;
   setOpen: (open: boolean) => void;
   open: boolean;
   promptData: any;
@@ -24,13 +27,12 @@ const CheckoutForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = await getUser();
-    const userData =JSON.parse(JSON.stringify(data));
-    console.log("From data",data)
+    // const data = await getUser();
+    const userData = user;
+    // console.log("From data", data);
     console.log("From userdata", userData);
 
-
-    console.log(userData?.user);
+    // console.log(userData?.user);
     if (!stripe || !elements) {
       return;
     }
@@ -42,7 +44,7 @@ const CheckoutForm = ({
       setMessage(error.message);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       await newOrder({
-        userId: userData?.user?.id,
+        userId: userData?.id!,
         promptId: promptData.id,
         payment_id: paymentIntent.id,
         payment_method: paymentIntent.id!,

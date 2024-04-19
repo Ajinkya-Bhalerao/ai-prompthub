@@ -8,12 +8,15 @@ import Ratings from "@/utils/Ratings";
 import { IoCloseOutline } from "react-icons/io5";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { User } from "@clerk/nextjs/server";
 
 const PromptDetailsCard = ({
+  user,
   promptData,
   stripePromise,
   clientSecret,
 }: {
+  user:User | undefined;
   promptData: any;
   stripePromise: any;
   clientSecret: string;
@@ -144,6 +147,7 @@ const PromptDetailsCard = ({
               {stripePromise && clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
                   <CheckoutForm
+                    user={user}
                     setOpen={setOpen}
                     open={open}
                     promptData={promptData}

@@ -4,12 +4,15 @@ import SellerBanner from "@/components/Shop/SellerBanner";
 import PromptDetailsCard from "./PromptDetailsCard";
 import PromptInformation from "./PromptInformation";
 import PromptCard from "../PromptCard";
+import { User } from "@clerk/nextjs/server";
 const PromptDetails = ({
+  user,
   promptData,
   relatedPrompts,
   stripePromise,
   clientSecret,
 }: {
+  user: User | undefined;
   promptData: any;
   relatedPrompts: any;
   stripePromise: any;
@@ -18,6 +21,7 @@ const PromptDetails = ({
   return (
     <div>
       <PromptDetailsCard
+        user={user}
         promptData={promptData}
         stripePromise={stripePromise}
         clientSecret={clientSecret}

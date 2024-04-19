@@ -57,7 +57,7 @@ const PromptDetailPage = ({
       <div>
         <div className="w-[95%] md:w-[80%] xl:w-[85%] 2xl:w-[80%] m-auto">
           <PromptDetails
-            
+            user={user}
             promptData={promptData}
             relatedPrompts={relatedPrompts}
             stripePromise={stripePromise}
