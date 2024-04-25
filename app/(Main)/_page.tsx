@@ -21,9 +21,10 @@ type Props = {
   user: User | undefined;
   isSellerExist: boolean | undefined;
   promptsData: any;
+  topSellers: any;
 };
 
-const RoutePage = ({ user, isSellerExist, promptsData }: Props) => {
+const RoutePage = ({ user, isSellerExist, promptsData, topSellers }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -80,12 +81,12 @@ const RoutePage = ({ user, isSellerExist, promptsData }: Props) => {
               </h1>
 
               <div className="flex flex-wrap">
-                {promptsData.map((prompt:any) =>{
-                    return <PromptCard key={prompt.id} prompt={prompt}/>
+                {promptsData.map((prompt: any) => {
+                  return <PromptCard key={prompt.id} prompt={prompt} />;
                 })}
               </div>
               <br />
-              <BestSellers />
+              <BestSellers topSellers={topSellers}/>
               <Future />
               <Partners />
               <SellerBanner />

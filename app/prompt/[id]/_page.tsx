@@ -51,8 +51,8 @@ const PromptDetailPage = ({
   return (
     <div>
       <div className="shop-banner">
-        <Header activeItem={2} user={user} isSellerExist={isSellerExist} />
-        <ShopBanner title="Animal Prompt" />
+        <Header activeItem={1} user={user} isSellerExist={isSellerExist} />
+        <ShopBanner title={promptData?.name} />
       </div>
       <div>
         <div className="w-[95%] md:w-[80%] xl:w-[85%] 2xl:w-[80%] m-auto">

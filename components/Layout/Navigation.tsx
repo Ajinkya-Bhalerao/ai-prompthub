@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -32,7 +33,7 @@ const Navigation = ({ activeItem }: Props) => {
   return (
     <div className="block md:flex">
       {navItems.map((item, index) => (
-        <div key={item.title}>
+        <Link key={item.title} href={item.href}>
           <h5
             className={`inline-block md:px-4 xl:px-8 py-5 md:py-0 text-[18px] font-[500] font-Inter ${
               activeItem === index && "text-[#64ff4b]"
@@ -40,7 +41,7 @@ const Navigation = ({ activeItem }: Props) => {
           >
             {item.title}
           </h5>
-        </div>
+        </Link>
       ))}
     </div>
   );

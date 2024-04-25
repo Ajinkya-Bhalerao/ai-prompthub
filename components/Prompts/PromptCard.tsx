@@ -13,6 +13,8 @@ type Props = {
 const PromptCard = ({ prompt }: Props) => {
   const [shopData, setShopData] = useState<any>();
 
+  // console.log(prompt)
+  
   useEffect(() => {
     // console.log(prompt.sellerId);
     if (prompt) getShopInfo();
@@ -75,8 +77,8 @@ const PromptCard = ({ prompt }: Props) => {
 
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center">
-          <Avatar src={shopData?.avatar} />
-          <span className={`${styles.label} pl-3`}>@{shopData?.name}</span>
+          <Avatar src={prompt?.shop?.avatar} />
+          <span className={`${styles.label} pl-3`}>@{prompt?.shop?.name}</span>
         </div>
         <Ratings rating={prompt.rating} />
       </div>
