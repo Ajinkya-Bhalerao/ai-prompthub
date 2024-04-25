@@ -13,6 +13,8 @@ type Props = {
 const PromptCard = ({ prompt }: Props) => {
   const [shopData, setShopData] = useState<any>();
 
+  // console.log(prompt)
+  
   useEffect(() => {
     // console.log(prompt.sellerId);
     if (prompt) getShopInfo();
@@ -23,7 +25,6 @@ const PromptCard = ({ prompt }: Props) => {
     
     setShopData(shopData);
   };
-  console.log(prompt)
   return (
     <Card
       radius="lg"
@@ -32,20 +33,38 @@ const PromptCard = ({ prompt }: Props) => {
       <div className="relative">
         <Image
           src={prompt?.images[0]?.url}
-          className="w-full"
+          alt=""
+          className="w-full !max-h-[200px] object-cover"
           width={300}
           height={300}
-          alt=""
         />
         <div className="absolute bottom-2 left-2">
           <div className="w-max bg-black hover:bg-[#16252] duration-300 transition-opacity hover:text-black text-white p-[10px] items-center flex rounded-xl">
-            <Image
-              src="https://pixner.net/aikeu/assets/images/category/chat.png"
-              width={25}
-              height={25}
-              alt=""
-            />
-            <span className={`${styles.label} pl-2 text-white`}>{prompt?.category}</span>
+            {prompt?.category === "Chatgpt" ? (
+              <Image
+                src="https://pixner.net/aikeu/assets/images/category/chat.png"
+                width={25}
+                height={25}
+                alt=""
+              />
+            ) : (
+              <>
+                {prompt?.category === "Dalle" ? (
+                  "⛵"
+                ) : (
+                  <>
+                    {prompt?.category === "Midjourney" ? (
+                      "🎨"
+                    ) : (
+                      <>{prompt?.category === "Bard" ? "🐥" : null}</>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+            <span className={`${styles.label} pl-2 text-white`}>
+              {prompt?.category}
+            </span>
           </div>
         </div>
       </div>
@@ -58,8 +77,8 @@ const PromptCard = ({ prompt }: Props) => {
 
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center">
-          <Avatar src={shopData?.avatar} />
-          <span className={`${styles.label} pl-3`}>@{shopData?.name}</span>
+          <Avatar src={prompt?.shop?.avatar} />
+          <span className={`${styles.label} pl-3`}>@{prompt?.shop?.name}</span>
         </div>
         <Ratings rating={prompt.rating} />
       </div>

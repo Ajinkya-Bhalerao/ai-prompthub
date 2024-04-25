@@ -44,9 +44,10 @@ const Hero = (props: Props) => {
   return (
     <div className="w-full md:mih-h-screen flex item-center justify-center">
       <div>
-        <h1 className="font-Monserrat text-4xl py-5 xl:text-7xl 2xl:text-8xl font-[700] text-center xl:leading-[80px] 2xl:leading-[100px] sm:mt-20">
-          Generate<span className="text-[#64ff4b]"> Ai Image</span> <br />
-          With Your <br /> Imagination
+        <h1 className="font-Monserrat text-4xl py-5 xl:text-5xl 2xl:text-8xl font-[500] text-center xl:leading-[80px] 2xl:leading-[100px] sm:mt-20">
+          Empower Tomorrow:
+          <span className="text-[#64ff4b]"> Ai Image</span> <br />
+          Your Gateway to <br /> AI Excellence!
         </h1>
         <div className="md:mt-5">
           <Image src={line} alt="" className="absolute hidden md:block" />
