@@ -60,9 +60,9 @@ const Hero = (props: Props) => {
                   src={i.url}
                   key={index}
                   alt=""
-                  className="md:m-4 w-[200px] m-2 md:w-[500px] rounded-[20px]"
-                  width={500}
-                  height={300}
+                  className="md:m-4 w-[200px] m-2 md:w-[300px] rounded-[20px]"
+                  width={200}
+                  height={200}
                 />
               ))}
             </MarQuee>
@@ -72,9 +72,9 @@ const Hero = (props: Props) => {
                   src={i.url}
                   key={index}
                   alt=""
-                  className="md:m-4 w-[200px] m-2 md:w-[500px] rounded-[20px]"
-                  width={500}
-                  height={300}
+                  className="md:m-4 w-[200px] m-2 md:w-[300px] rounded-[20px]"
+                  width={200}
+                  height={200}
                 />
               ))}
             </MarQuee>

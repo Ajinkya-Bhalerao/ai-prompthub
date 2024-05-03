@@ -2,7 +2,7 @@
 import PromptDetailPage from "@/app/prompt/[id]/_page";
 import prisma from "@/lib/prismaDb";
 
-export async function getAllPrompts(pageNumber = 1 , pageSize = 8) {
+export async function getAllPrompts(pageNumber = 1 , pageSize = 20) {
     try{
             const prompts: any = await prisma.prompts.findMany({
                 include: {
