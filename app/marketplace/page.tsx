@@ -14,7 +14,7 @@ const Page = async ({
   const data = JSON.parse(JSON.stringify(check));
 
   const promptsData = await getAllPrompts();
-  // console.log(promptsData)
+  console.log(promptsData.length)
 
   return (
     <div>

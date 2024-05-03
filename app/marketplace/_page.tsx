@@ -27,7 +27,7 @@ const MarketPlaceRouter = ({
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
-
+  // console.log(promptsData.length)
   
   const fetchPromptsData = async () => {
     setLoading(true);
@@ -64,7 +64,7 @@ const MarketPlaceRouter = ({
     return null;
   }
 
-  const paginationsPages = totalPrompts && Math.ceil(totalPrompts.length / 8);
+  const paginationsPages = totalPrompts && Math.ceil(totalPrompts.length / 20);
 
   return (
     <>
@@ -83,7 +83,7 @@ const MarketPlaceRouter = ({
             </div>
             <div className="w-full flex flex-wrap mt-5">
               {loading ? (
-                [...new Array(8)].map((i,idx) => (
+                [...new Array(20)].map((i,idx) => (
                   <>
                     <PromptCardLoader key={idx} />
                   </>

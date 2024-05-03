@@ -4,6 +4,7 @@ import { Avatar } from "@nextui-org/react";
 import { format } from "timeago.js";
 
 const ReviewCard = ({ item }: { item: any }) => {
+  console.log(item)
   return (
     <div className="flex my-2">
       <div>
@@ -12,7 +13,7 @@ const ReviewCard = ({ item }: { item: any }) => {
       <div className="pl-3">
         <div className="flex items-center">
           <span className={`${styles.label} !text-xl text-white`}>
-            {item?.user?.firstName + " " + item?.user.lastName!}
+            {/* {item?.user?.firstName + " " + item?.user.lastName!} */}
           </span>
           <span className={`${styles.label} pl-3`}>
             {format(item?.createdAt)}

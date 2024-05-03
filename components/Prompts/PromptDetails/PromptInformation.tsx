@@ -21,6 +21,7 @@ let tabs = [
 ];
 
 const PromptInformation = ({ promptData }: Props) => {
+  // console.log(promptData);
   return (
     <div>
       <div className="flex w-full flex-col bg-slate-900 p-3 rounded-md">
